@@ -1,0 +1,7 @@
+[profile.default]
+libs = ["lib"]
+out = "out"
+remappings = ["@cowprotocol/=node_modules/@cowprotocol/"]
+src = "src"
+
+# See more config options https://github.com/foundry-rs/foundry/tree/master/config
