@@ -34,7 +34,7 @@ const zkEVMBridgeAddress = "0x2a3DD3EB832aF982ec71669E178424b10Dca2EDe";
 const vaultRelayerAddress = "0xC92E8bdf79f0507f65a392b0ab4667716BFE0110";
 const MAX_UINT = 2n ** 256n - 1n;
 // TODO: fix this
-const zkevmBridgerAddress = "0x2a3DD3EB832aF982ec71669E178424b10Dca2EDe";
+const zkevmBridgerAddress = "0x8866d74b2dFf96DC4cbCb11e70ed54b432EE8c3B";
 
 const approveIfNotApproved = async (
   client: ReturnType<typeof createPublicClient>,
@@ -57,18 +57,18 @@ const approveIfNotApproved = async (
       functionName: "approve",
       args: [vaultRelayerAddress, MAX_UINT],
       account,
-      chain: goerli,
+      chain: mainnet,
     });
     return setAllowanceTxHash;
   }
 };
 
 const main = async () => {
-  // const rpcUrl = "https://eth.llamarpc.com";
-  const rpcUrl = "https://ethereum-goerli.publicnode.com";
+  const rpcUrl = "https://eth.llamarpc.com";
+  // const rpcUrl = "https://ethereum-goerli.publicnode.com";
   const transport = http(rpcUrl);
   const client = createPublicClient({
-    chain: goerli,
+    chain: mainnet,
     transport,
   });
 
@@ -86,7 +86,7 @@ const main = async () => {
     account,
     transport,
   });
-  const cowChainId = SupportedChainId.GOERLI;
+  const cowChainId = SupportedChainId.MAINNET;
 
   const fromTokenDecimals = (await client.readContract({
     abi: erc20Abi,
@@ -142,8 +142,7 @@ const main = async () => {
     appData: JSON.stringify({
       backend: { hooks: { post: [approveHook, bridgeHook], pre: [] } },
     }),
-    // receiver: zkevmBridgerAddress,
-    receiver: account.address,
+    receiver: zkevmBridgerAddress,
   };
   console.log(orderData);
   const quoteResponse = await orderBookApi.getQuote(orderData);

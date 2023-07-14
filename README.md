@@ -14,3 +14,6 @@ yarn ts-node zkevm-swap-and-bridge.ts \
 It will create a cowswap order with `receiver` set to the [`ZkEVMBridger`](./src/ZkEVMBridger.sol)
 address. And in the post hook `bridgeToken` method gets called with
 user's output token and user's address as receiver for the bridged assets.
+
+The [`ZkEVMBridger`](./src/ZkEVMBridger.sol) contract has been deployed on
+mainnet at [`0x8866d74b2dFf96DC4cbCb11e70ed54b432EE8c3B`](https://etherscan.io/address/0x8866d74b2dFf96DC4cbCb11e70ed54b432EE8c3B#code).
