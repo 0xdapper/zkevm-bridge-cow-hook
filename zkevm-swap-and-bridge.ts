@@ -144,11 +144,11 @@ const main = async () => {
     }),
     receiver: zkevmBridgerAddress,
   };
-  console.log(orderData);
+  console.log("Order data: ", orderData);
   const quoteResponse = await orderBookApi.getQuote(orderData);
   // console.log({ quoteResponse });
 
-  console.log({ quoteResponse });
+  console.log("Quote response: ", quoteResponse);
   const signedOrder = await OrderSigningUtils.signOrder(
     {
       ...quoteResponse.quote,
@@ -168,7 +168,11 @@ const main = async () => {
         : SigningScheme.ETHSIGN,
   });
 
-  console.log({ sentOrder });
+  console.log("Sent order: ", sentOrder);
+  console.log(
+    "Explorer URL: ",
+    `https://explorer.cow.fi/orders/${sentOrder}?tab=overview`
+  );
 };
 
 main();
