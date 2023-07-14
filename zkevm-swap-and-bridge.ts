@@ -109,16 +109,6 @@ const main = async () => {
     console.log("Approve tx receipt: ", txReceipt);
   }
 
-  const approveHook = {
-    target: toToken,
-    callData: encodeFunctionData({
-      abi: erc20Abi,
-      functionName: "approve",
-      args: [zkEVMBridgeAddress, MAX_UINT],
-    }),
-    gasLimit: (200000).toString(),
-  };
-
   const bridgeHook = {
     target: zkevmBridgerAddress,
     callData: encodeFunctionData({
@@ -140,7 +130,7 @@ const main = async () => {
     from: account.address,
     validTo: Math.floor(new Date().getTime() / 1000 + 3600),
     appData: JSON.stringify({
-      backend: { hooks: { post: [approveHook, bridgeHook], pre: [] } },
+      backend: { hooks: { post: [bridgeHook], pre: [] } },
     }),
     receiver: zkevmBridgerAddress,
   };
